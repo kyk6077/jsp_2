@@ -9,21 +9,18 @@ import com.iu.util.DBConnector;
 
 public class NoticeDAO {
 	
-	public static void main(String[] args) {
-		
-		NoticeDTO nt = new NoticeDTO();
-		nt.setTitle("Title3");
-		nt.setContents("Contents3");
-		nt.setWriter("Writer3");
-		try {
-			new NoticeDAO().insert(nt);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
+	//getCount
+	public int getCount() throws Exception{
+		Connection con = DBConnector.getConnect();
+		String sql = "SELECT count(num) from notice";
+		PreparedStatement st = con.prepareStatement(sql);
+		ResultSet rs = st.executeQuery();
+		rs.next();
+		int result = rs.getInt(1);
+		DBConnector.disConnect(rs, st, con);
+		return result;
 	}
+	
 	
 	//selectOne
 	public NoticeDTO selectOne(int num) throws Exception{
@@ -49,6 +46,31 @@ public class NoticeDAO {
 	
 	
 	//selectList
+	public ArrayList<NoticeDTO> selectList(int startrow, int lastrow) throws Exception{
+		Connection con = DBConnector.getConnect();
+		String sql = "SELECT * FROM "
+				+ "(select rownum R, N.* from "
+				+ "(select num, title, writer, reg_date, hit from notice order by num desc) N) " 
+				+ "where R between ? and ?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setInt(1, startrow);
+		st.setInt(2, lastrow);
+		ResultSet rs = st.executeQuery();
+		ArrayList<NoticeDTO> ntList = new ArrayList<>();
+		while(rs.next()) {
+			NoticeDTO nt = new NoticeDTO();
+			nt.setNum(rs.getInt("num"));
+			nt.setTitle(rs.getString("title"));
+			nt.setWriter(rs.getString("writer"));
+			nt.setReg_date(rs.getDate("reg_date"));
+			nt.setHit(rs.getInt("hit"));
+			ntList.add(nt);
+		}
+		
+		DBConnector.disConnect(rs, st, con);
+		return ntList;
+	}
+	
 	public ArrayList<NoticeDTO> selectList() throws Exception{
 		Connection con = DBConnector.getConnect();
 		String sql = "select * from notice";
@@ -58,12 +80,12 @@ public class NoticeDAO {
 		ArrayList<NoticeDTO> ntList = new ArrayList<>();
 		while(rs.next()) {
 			NoticeDTO nt = new NoticeDTO();
-			nt.setNum(rs.getInt(1));
-			nt.setTitle(rs.getString(2));
-			nt.setContents(rs.getString(3));
-			nt.setWriter(rs.getString(4));
-			nt.setReg_date(rs.getDate(5));
-			nt.setHit(rs.getInt(6));
+			nt.setNum(rs.getInt("num"));
+			nt.setTitle(rs.getString("title"));
+			nt.setContents(rs.getString("contents"));
+			nt.setWriter(rs.getString("writer"));
+			nt.setReg_date(rs.getDate("reg_date"));
+			nt.setHit(rs.getInt("hit"));
 			ntList.add(nt);
 		}
 		
