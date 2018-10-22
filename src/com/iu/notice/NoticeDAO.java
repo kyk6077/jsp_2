@@ -9,20 +9,21 @@ import com.iu.util.DBConnector;
 
 public class NoticeDAO {
 	
-//	public static void main(String[] args) {
-//		
-//		NoticeDTO nt = new NoticeDTO();
-//		nt.setTitle("Title3");
-//		nt.setContents("Contents3");
-//		nt.setWriter("Writer3");
-//		try {
-//			new NoticeDAO().insert(nt);
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//	}
+	public static void main(String[] args) {
+		
+		NoticeDTO nt = new NoticeDTO();
+		nt.setTitle("Title3");
+		nt.setContents("Contents3");
+		nt.setWriter("Writer3");
+		try {
+			new NoticeDAO().insert(nt);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
 	
 	//selectOne
 	public NoticeDTO selectOne(int num) throws Exception{

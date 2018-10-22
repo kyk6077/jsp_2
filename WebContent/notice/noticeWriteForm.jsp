@@ -51,7 +51,7 @@
   <h2 class="body_title">Write</h2>
   <form class="form-horizontal" action="./noticeWriteProcess.jsp">
     <div class="form-group">
-      <label class="control-label col-sm-2"">Title:</label>
+      <label class="control-label col-sm-2">Title:</label>
       <div class="col-sm-10">
         <input type="text" class="form-control" name="title">
       </div>
@@ -59,7 +59,7 @@
     <div class="form-group">
       <label class="control-label col-sm-2">Contents:</label>
       <div class="col-sm-10">          
-        <input type="text" class="form-control" name="contents">
+        <textarea rows="15" cols="" class="form-control" name="contents"></textarea>
       </div>
     </div>
     <div class="form-group">

@@ -5,7 +5,6 @@
     pageEncoding="UTF-8"%>
     
 <%
-//--------table---------
 NoticeDAO nDAO = new NoticeDAO();
 ArrayList<NoticeDTO> ntList = nDAO.selectList();
 
@@ -263,6 +262,7 @@ ArrayList<NoticeDTO> ntList = nDAO.selectList();
 	</table>
 	<a class="btn btn-warning" href="noticeWriteForm.jsp">Write</a>
 </div>
+
 
 </body>
 </html>
