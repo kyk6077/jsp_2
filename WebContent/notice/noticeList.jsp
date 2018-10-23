@@ -9,8 +9,6 @@
 	int curPage = 1;
 	String kind = request.getParameter("kind");
 	String search= request.getParameter("search");
-	System.out.println("kind: "+kind);
-	System.out.println("search: "+search);
 	
 	if(kind==null){
 		kind="title";
@@ -375,7 +373,7 @@ translateY
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#MyPage">NOTICE</a></li>
-					<li><a href="#services">SERVICES</a></li>
+					<li><a href="../member/memberList.jsp">MEMBER</a></li>
 					<li><a href="#portfolio">PORTFOLIO</a></li>
 					<li><a href="#pricing">PRICING</a></li>
 					<li><a href="#contact">CONTACT</a></li>

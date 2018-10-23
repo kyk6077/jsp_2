@@ -13,6 +13,14 @@ String message = "Insert Fail";
 if(result>0){
 	message = "Insert Success";
 }
+request.setAttribute("message", message);
+request.setAttribute("path","./noticeList.jsp");
+RequestDispatcher view = request.getRequestDispatcher("../common/result.jsp");
+view.forward(request, response);
+
+//redirect
+// response.sendRedirect("../index.jsp");//이동해야할 주소
+
 %>    
 <!DOCTYPE html>
 <html>
@@ -20,8 +28,6 @@ if(result>0){
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	alert('<%= message%>');
-	location.href="noticeList.jsp";
 </script>
 </head>
 <body>
