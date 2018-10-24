@@ -78,7 +78,7 @@ MemberDTO mDTO = (MemberDTO)session.getAttribute("member");
 	</table>
 	<p id ="content_main"><%= ntDTO.getContents() %></p>
 	
-	<%if(ntDTO.getWriter().equals(mDTO.getId())){ %>
+	<%if(mDTO != null && ntDTO.getWriter().equals(mDTO.getId())){ %>
 	<a class="btn btn-primary" href="./noticeUpdateForm.jsp?num=<%= ntDTO.getNum()%>">UPDATE</a>
 	<a class="btn btn-primary" href="./noticeDeleteProcess.jsp?num=<%= ntDTO.getNum()%>">DELETE</a>
 	<%} %>
