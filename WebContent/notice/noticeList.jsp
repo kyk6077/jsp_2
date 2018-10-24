@@ -1,3 +1,4 @@
+<%@page import="com.iu.member.MemberDTO"%>
 <%@page import="com.iu.notice.NoticeDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.iu.notice.NoticeDAO"%>
@@ -448,10 +449,14 @@ translateY
 			</ul>
 		</div>
 	</div>
+	
+	<%MemberDTO memberDTO = (MemberDTO)session.getAttribute("member"); %>
+	<%if(memberDTO != null && memberDTO.getKind().equals("T")) {%>
 	<div class="container-fluid">
 		<div class="row">
 			<a class="btn btn-warning" href="noticeWriteForm.jsp">Write</a>
 		</div>
 	</div>
+	<%}%>
 </body>
 </html>

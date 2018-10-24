@@ -167,9 +167,21 @@ if(curBlock == totalBlock){
 			</ul>
 		</div>
 	</div>
+	
+	<%
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+	%>
+	
 	<div class="container-fluid">
 		<div class="row">
-			<a class="btn btn-warning" href="memberJoin.jsp">Write</a>
+			<%if(memberDTO != null){ %>
+				<h3><%= memberDTO.getId() %> 님 환영합니다.</h3>
+				<a href="./memberLogout.jsp">LogOut</a>
+				<a href="./memberMyPage.jsp">MyPage</a>
+			<%}else {%>
+			<a class="btn btn-warning" href="memberJoin.jsp">Join</a>
+			<a class="btn btn-warning" href="./memberLogin.jsp">Login</a>
+			<%}%>
 		</div>
 	</div>
 </body>

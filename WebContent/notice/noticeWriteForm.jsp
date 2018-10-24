@@ -1,5 +1,7 @@
+<%@page import="com.iu.member.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%MemberDTO mDTO = (MemberDTO)session.getAttribute("member"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,6 +49,7 @@
   </div>
 </nav>
 
+
 	<div class="container">
   <h2 class="body_title">Write</h2>
   <form class="form-horizontal" action="./noticeWriteProcess.jsp">
@@ -65,7 +68,7 @@
     <div class="form-group">
       <label class="control-label col-sm-2">Writer:</label>
       <div class="col-sm-10">          
-        <input type="text" class="form-control" name="writer">
+        <input type="text" class="form-control" name="writer" value="<%= mDTO.getId() %>" readonly="readonly">
       </div>
     </div>
     <div class="form-group">        

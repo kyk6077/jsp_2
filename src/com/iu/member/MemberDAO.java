@@ -14,13 +14,13 @@ public class MemberDAO {
 //	public static void main(String[] args) {
 //		MemberDAO mDAO = new MemberDAO();
 //		Random r = new Random();
-//		for(int i=150;i<250;i++){
+//		for(int i=1;i<40;i++){
 //			MemberDTO mDTO = new MemberDTO();
-//			mDTO.setId("id"+i);
-//			mDTO.setPw("pw"+i);
-//			mDTO.setName("name"+i);
+//			mDTO.setId("tid"+i);
+//			mDTO.setPw("tpw"+i);
+//			mDTO.setName("tname"+i);
 //			mDTO.setEmail(i+"s"+i+"g"+i+"@"+"naver.com");
-//			mDTO.setKind("S");
+//			mDTO.setKind("T");
 //			mDTO.setClassmate("cm"+(r.nextInt(3)+1)+(r.nextInt(5)+1));
 //			try {
 //				System.out.println(mDTO.getClassmate());
@@ -43,6 +43,8 @@ public class MemberDAO {
 //			e.printStackTrace();
 //		}
 //	}
+	
+	
 	
 	public int getCount(String kind, String search) throws Exception{
 		Connection con = DBConnector.getConnect();
@@ -73,6 +75,26 @@ public class MemberDAO {
 		return result;
 	}
 	
+	public MemberDTO selectOne(MemberDTO memberDTO) throws Exception{
+		Connection con = DBConnector.getConnect();
+		String sql = "SELECT * FROM member where id=? and pw=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, memberDTO.getId());
+		st.setString(2, memberDTO.getPw());
+		ResultSet rs = st.executeQuery();
+		MemberDTO mDto = null;
+		if(rs.next()) {
+			mDto = new MemberDTO();
+			mDto.setId(rs.getString("id"));
+			mDto.setName(rs.getString("name"));
+			mDto.setEmail(rs.getString("email"));
+			mDto.setKind(rs.getString("kind"));
+			mDto.setClassmate(rs.getString("classmate"));
+		}
+		
+		return mDto;
+	}
+	
 	public List<MemberDTO> memberList(int startRow, int lastRow, String kind, String search) throws Exception{
 		Connection con = DBConnector.getConnect();
 		List<MemberDTO> mList = new ArrayList<>();
@@ -97,5 +119,34 @@ public class MemberDAO {
 		}
 		DBConnector.disConnect(rs, st, con);
 		return mList;
+	}
+	
+	
+	public int update(MemberDTO mDTO) throws Exception {
+		Connection con = DBConnector.getConnect();
+		String sql = "update member set pw=?,name=?,email=? where id=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		System.out.println(mDTO.getPw());
+		System.out.println(mDTO.getName());
+		System.out.println(mDTO.getEmail());
+		System.out.println(mDTO.getId());
+		st.setString(1, mDTO.getPw());
+		st.setString(2, mDTO.getName());
+		st.setString(3, mDTO.getEmail());
+		st.setString(4, mDTO.getId());
+		int result = st.executeUpdate();
+		
+		DBConnector.disConnect(st, con);
+		return result;
+	}
+	public int delete(String id) throws Exception{
+		Connection con = DBConnector.getConnect();
+		String sql = "delete member where id=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, id);
+		int result = st.executeUpdate();
+		
+		DBConnector.disConnect(st, con);
+		return result;
 	}
 }

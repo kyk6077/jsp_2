@@ -1,10 +1,11 @@
+<%@page import="com.iu.member.MemberDTO"%>
 <%@page import="com.iu.notice.NoticeDTO"%>
 <%@page import="com.iu.notice.NoticeDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%NoticeDAO ntDAO = new NoticeDAO();
 NoticeDTO ntDTO = ntDAO.selectOne(Integer.parseInt(request.getParameter("num")));
-
+MemberDTO mDTO = (MemberDTO)session.getAttribute("member");
 %>    
 <!DOCTYPE html>
 <html>
@@ -77,9 +78,10 @@ NoticeDTO ntDTO = ntDAO.selectOne(Integer.parseInt(request.getParameter("num")))
 	</table>
 	<p id ="content_main"><%= ntDTO.getContents() %></p>
 	
+	<%if(ntDTO.getWriter().equals(mDTO.getId())){ %>
 	<a class="btn btn-primary" href="./noticeUpdateForm.jsp?num=<%= ntDTO.getNum()%>">UPDATE</a>
 	<a class="btn btn-primary" href="./noticeDeleteProcess.jsp?num=<%= ntDTO.getNum()%>">DELETE</a>
-	
+	<%} %>
 </div>
 
 </body>

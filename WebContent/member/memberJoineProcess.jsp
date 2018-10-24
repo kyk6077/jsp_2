@@ -2,8 +2,9 @@
 <%@page import="com.iu.member.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%MemberDAO mDAO = new MemberDAO();
+<%
 MemberDTO mDTO = new MemberDTO();
+MemberDAO mDAO = new MemberDAO();
 mDTO.setId(request.getParameter("id"));
 mDTO.setPw(request.getParameter("pw"));
 mDTO.setName(request.getParameter("name"));
