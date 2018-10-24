@@ -373,7 +373,7 @@ translateY
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#MyPage">NOTICE</a></li>
+					<li><a href="/jsp_2/notice/noticeList.jsp">NOTICE</a></li>
 					<li><a href="../member/memberList.jsp">MEMBER</a></li>
 					<li><a href="#portfolio">PORTFOLIO</a></li>
 					<li><a href="#pricing">PRICING</a></li>
