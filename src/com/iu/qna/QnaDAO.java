@@ -116,7 +116,7 @@ public class QnaDAO {
 	}
 	
 	//reply 전에 step 정리
-	public int stepUpdate(int ref, int step) throws Exception{
+	public int replyUpdate(int ref, int step) throws Exception{
 		Connection con = DBConnector.getConnect();
 		String sql = "update qna set step=step+1 where ref= ? and step > ?";
 		//부모 ref랑 같고 부모 step 보다 크면 step 1씩 증가

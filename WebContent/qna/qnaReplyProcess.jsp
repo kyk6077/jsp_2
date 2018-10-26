@@ -20,21 +20,20 @@
 	qDTO.setRef(qnaDTO.getRef());
 	qDTO.setStep(qnaDTO.getStep());
 	qDTO.setDepth(qnaDTO.getDepth());
-	//2. stepUpdate
-	qnaDAO.stepUpdate(qnaDTO.getRef(), qnaDTO.getStep());
+	//2. replyUpdate
+	int result = qnaDAO.replyUpdate(qnaDTO.getRef(), qnaDTO.getStep());
 	//3. reply
-	int result = qnaDAO.reply(qDTO);
+	result = qnaDAO.reply(qDTO);
 	
-	String message = "reply Fail";
 	if(result>0){
-		message = "reply Success";
+		response.sendRedirect("./qnaList.jsp");
+	}else{
+		request.setAttribute("message", "reply Fail");
+		request.setAttribute("path","./qnaList.jsp");
+		//이동해야할 페이지의 주소
+		RequestDispatcher view = request.getRequestDispatcher("../common/result.jsp");
+		view.forward(request, response);
 	}
-	
-	request.setAttribute("message", message);
-	request.setAttribute("path","./qnaList.jsp");
-	//이동해야할 페이지의 주소
-	RequestDispatcher view = request.getRequestDispatcher("../common/result.jsp");
-	view.forward(request, response);
 %>
 
 <!DOCTYPE html>
